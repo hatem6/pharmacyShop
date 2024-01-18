@@ -18,7 +18,7 @@
       </li>
     </ul>
     <div class="mt-8 items-center justify-between sm:flex">
-      <div class="mt-4 sm:mt-0">&copy; 2022 All rights reserved.</div>
+      <div class="mt-4 sm:mt-0">&copy; 2024 All rights reserved.</div>
       <div class="mt-6 sm:mt-0">
         <ul class="flex items-center space-x-4">
           <li

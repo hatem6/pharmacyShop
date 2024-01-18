@@ -2,9 +2,9 @@
   <nav class="bg-white w-full top-0 z-20">
     <div class="items-center px-4 max-w-screen-xl mx-auto lg:flex lg:px-8">
       <div class="flex items-center justify-between py-3 lg:py-4 lg:block">
-        <a href="#  ">
+        <router-link to="/">
           <img src="" width="120" height="50" alt="logo" />
-        </a>
+        </router-link>
         <div class="lg:hidden">
           <button
             class="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
@@ -116,7 +116,6 @@ export default {
     return {
       navigation: [
         { title: "Medicaments", router: "#" },
-        { title: "Babe", router: "#" },
         { title: "Contact", router: "#" },
       ],
     };
