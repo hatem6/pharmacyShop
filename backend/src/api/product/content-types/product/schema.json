@@ -23,7 +23,19 @@
         "files"
       ]
     },
-    "name": {
+    "productName": {
+      "type": "string"
+    },
+    "productPrice": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "genre": {
+      "type": "string"
+    },
+    "type": {
       "type": "string"
     }
   }

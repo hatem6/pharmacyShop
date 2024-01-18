@@ -375,7 +375,11 @@ export interface ApiProductProduct extends Schema.CollectionType {
   };
   attributes: {
     productImg: Attribute.Media & Attribute.Required;
-    name: Attribute.String;
+    productName: Attribute.String;
+    productPrice: Attribute.String;
+    description: Attribute.Text;
+    genre: Attribute.String;
+    type: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
