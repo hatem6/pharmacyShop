@@ -8,7 +8,7 @@
       >
         <!-- article - start -->
         <div
-          v-for="product in Products.data"
+          v-for="product in newProducts"
           :key="product.id"
           data-aos="fade-left"
           class="flex flex-col items-center gap-4 md:flex-row lg:gap-6"
@@ -18,7 +18,7 @@
             class="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-40 lg:w-40"
           >
             <img
-              :src="product.attributes.productImg.data[0].attributes.url"
+              :src="product.productImg"
               loading="lazy"
               alt="Photo by Martin Sanchez"
               class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
@@ -32,12 +32,12 @@
               <a
                 href="#"
                 class="transition duration-100 hover:text-indigo-500 active:text-indigo-600"
-                >{{ product.attributes.productName }}</a
+                >{{ product.productName }}</a
               >
             </h2>
 
             <p class="text-gray-500">
-              {{ product.attributes.description }}
+              {{ product.description }}
             </p>
 
             <div>
@@ -68,8 +68,13 @@ export default {
           // Your API response data here
         ],
       },
+      newProducts: [],
+      saveProducts: [],
+      type: null,
+      total: null,
     };
   },
+
   created() {
     this.$nextTick(() => {
       AOS.init({
@@ -90,16 +95,27 @@ export default {
         const response = await axios.get(
           "https://fastcure.onrender.com/api/products?populate=*"
         );
-
-        // Filter response data based on genre and type
-        const filteredData = response.data.data.filter((item) => {
-          // Replace 'desiredGenre' and 'desiredType' with your actual criteria
-          return (
-            item.attributes.genre === "adulte" &&
-            item.attributes.type === "fievre"
-          );
-        });
-        this.Products.data = filteredData;
+        this.total = response.data.meta.pagination.total;
+        for (let i = 0; i < this.total; i++) {
+          let product = {
+            productImg:
+              response.data.data[i].attributes.productImg.data[0].attributes
+                .url,
+            productName: response.data.data[i].attributes.productName,
+            productPrice: response.data.data[i].attributes.productPrice,
+            description: response.data.data[i].attributes.description,
+            genre: response.data.data[i].attributes.genre,
+            type: response.data.data[i].attributes.type,
+          };
+          if (
+            response.data.data[i].attributes.genre == "adulte" &&
+            response.data.data[i].attributes.type == "fievre"
+            //this.locaType.toLowerCase()
+          ) {
+            this.newProducts.push(product);
+          }
+        }
+        console.table(this.newProducts);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
