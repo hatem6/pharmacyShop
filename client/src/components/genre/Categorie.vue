@@ -16,6 +16,7 @@
             }`"
           >
             <a
+              @click="emitTitle(item.title)"
               :href="item.path"
               class="block py-2 px-3 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 duration-150"
             >
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+import { eventBus } from "./eventBus.js";
 export default {
   data() {
     return {
@@ -56,6 +58,9 @@ export default {
     },
     setActiveIndex(index) {
       this.activeIndex = index;
+    },
+    emitTitle(title) {
+      eventBus.emit("title-selected", title);
     },
   },
 };

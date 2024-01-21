@@ -56,10 +56,12 @@
   </div>
 </template>
 <script>
+import { eventBus } from "./eventBus.js";
 import axios from "axios";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import Categorie from "./Categorie.vue";
+
 export default {
   data() {
     return {
@@ -68,14 +70,14 @@ export default {
           // Your API response data here
         ],
       },
+      title: "",
       newProducts: [],
-      saveProducts: [],
-      type: null,
       total: null,
     };
   },
 
   created() {
+    this.displayDefault();
     this.$nextTick(() => {
       AOS.init({
         duration: 2500,
@@ -84,13 +86,53 @@ export default {
         mirror: false,
       });
     });
+
+    eventBus.on("title-selected", (title) => {
+      this.title = title;
+    });
+
+    // Watch for changes in the 'title' property and fetch data accordingly
+    this.$watch("title", (newTitle, oldTitle) => {
+      if (newTitle !== oldTitle) {
+        this.fetchDataFromAPI();
+      }
+    });
   },
 
   components: {
     Categorie,
   },
+
   methods: {
     async fetchDataFromAPI() {
+      console.log(this.title);
+      try {
+        const response = await axios.get(
+          "https://fastcure.onrender.com/api/products?populate=*"
+        );
+
+        this.total = response.data.meta.pagination.total;
+        this.newProducts = response.data.data
+          .filter(
+            (item) =>
+              item.attributes.genre === "adulte" &&
+              item.attributes.type === this.title.toLowerCase()
+          )
+          .map((item) => ({
+            productImg: item.attributes.productImg.data[0].attributes.url,
+            productName: item.attributes.productName,
+            productPrice: item.attributes.productPrice,
+            description: item.attributes.description,
+            genre: item.attributes.genre,
+            type: item.attributes.type,
+          }));
+
+        console.table(this.newProducts);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    },
+    async displayDefault() {
       try {
         const response = await axios.get(
           "https://fastcure.onrender.com/api/products?populate=*"
@@ -110,7 +152,6 @@ export default {
           if (
             response.data.data[i].attributes.genre == "adulte" &&
             response.data.data[i].attributes.type == "fievre"
-            //this.locaType.toLowerCase()
           ) {
             this.newProducts.push(product);
           }
@@ -121,9 +162,7 @@ export default {
       }
     },
   },
-  mounted() {
-    this.fetchDataFromAPI();
-  },
+  mounted() {},
 };
 </script>
 <style scoped></style>
