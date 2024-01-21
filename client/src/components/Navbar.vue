@@ -108,14 +108,13 @@
   }
 }
 </style>
-
 <script>
 import { ref } from "vue";
 export default {
   data: function () {
     return {
       navigation: [
-        { title: "Medicaments", router: "#" },
+        { title: "Medicaments", router: "/" },
         { title: "Contact", router: "#" },
       ],
     };

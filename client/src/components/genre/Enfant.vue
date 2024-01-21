@@ -56,28 +56,22 @@
   </div>
 </template>
 <script>
+import fetchProducts from "./Products.js";
 import { eventBus } from "./eventBus.js";
-import axios from "axios";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import Categorie from "./Categorie.vue";
-
 export default {
   data() {
     return {
-      Products: {
-        data: [
-          // Your API response data here
-        ],
-      },
       title: "",
       newProducts: [],
+      saveProducts: [],
       total: null,
     };
   },
 
   created() {
-    this.displayDefault();
     this.$nextTick(() => {
       AOS.init({
         duration: 2500,
@@ -94,7 +88,7 @@ export default {
     // Watch for changes in the 'title' property and fetch data accordingly
     this.$watch("title", (newTitle, oldTitle) => {
       if (newTitle !== oldTitle) {
-        this.fetchDataFromAPI();
+        this.fetchData();
       }
     });
   },
@@ -104,65 +98,54 @@ export default {
   },
 
   methods: {
-    async fetchDataFromAPI() {
+    fetchData() {
       console.log(this.title);
-      try {
-        const response = await axios.get(
-          "https://fastcure.onrender.com/api/products?populate=*"
-        );
-
-        this.total = response.data.meta.pagination.total;
-        this.newProducts = response.data.data
-          .filter(
-            (item) =>
-              item.attributes.genre === "enfant" &&
-              item.attributes.type === this.title.toLowerCase()
-          )
-          .map((item) => ({
-            productImg: item.attributes.productImg.data[0].attributes.url,
-            productName: item.attributes.productName,
-            productPrice: item.attributes.productPrice,
-            description: item.attributes.description,
-            genre: item.attributes.genre,
-            type: item.attributes.type,
-          }));
-
-        console.table(this.newProducts);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      this.newProducts = this.saveProducts
+        .filter(
+          (item) =>
+            item.genre === "enfant" && item.type === this.title.toLowerCase()
+        )
+        .map((item) => ({
+          productImg: item.productImg,
+          productName: item.productName,
+          productPrice: item.productPrice,
+          description: item.description,
+          genre: item.genre,
+          type: item.type,
+        }));
     },
-    async displayDefault() {
-      try {
-        const response = await axios.get(
-          "https://fastcure.onrender.com/api/products?populate=*"
-        );
-        this.total = response.data.meta.pagination.total;
-        for (let i = 0; i < this.total; i++) {
-          let product = {
-            productImg:
-              response.data.data[i].attributes.productImg.data[0].attributes
-                .url,
-            productName: response.data.data[i].attributes.productName,
-            productPrice: response.data.data[i].attributes.productPrice,
-            description: response.data.data[i].attributes.description,
-            genre: response.data.data[i].attributes.genre,
-            type: response.data.data[i].attributes.type,
-          };
-          if (
-            response.data.data[i].attributes.genre == "enfant" &&
-            response.data.data[i].attributes.type == "fievre"
-          ) {
-            this.newProducts.push(product);
-          }
+    displayDefault() {
+      for (let i = 0; i < this.saveProducts.length; i++) {
+        let product = {
+          productImg: this.saveProducts[i].productImg,
+          productName: this.saveProducts[i].productName,
+          productPrice: this.saveProducts[i].productPrice,
+          description: this.saveProducts[i].description,
+          genre: this.saveProducts[i].genre,
+          type: this.saveProducts[i].type,
+        };
+
+        if (
+          this.saveProducts[i].genre === "enfant" &&
+          this.saveProducts[i].type === "fievre"
+        ) {
+          this.newProducts.push(product);
         }
-        console.table(this.newProducts);
-      } catch (error) {
-        console.error("Error fetching data:", error);
       }
     },
   },
-  mounted() {},
+  async mounted() {
+    fetchProducts();
+    try {
+      const storedProducts = localStorage.getItem("Products");
+      if (storedProducts) {
+        this.saveProducts = JSON.parse(storedProducts);
+      }
+      await this.displayDefault();
+    } catch (error) {
+      console.error("Error retrieving products from localStorage:", error);
+    }
+  },
 };
 </script>
 <style scoped></style>

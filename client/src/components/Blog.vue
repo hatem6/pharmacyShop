@@ -3,10 +3,15 @@
     <div class="mx-auto max-w-screen-xl px-4 md:px-8">
       <!-- text - start -->
       <div class="mb-10 md:mb-16 flex flex-col items-center">
+        <br />
         <h2
           class="mb-4 text-center text-2xl font-bold text-gray-700 md:mb-6 lg:text-3xl"
         >
-          Livraison Medical
+          Livraison
+          <span
+            class="mb-4 text-center text-2xl font-bold text-green-600 md:mb-6 lg:text-3xl"
+            >Medical</span
+          >
         </h2>
 
         <!-- Center the lottieContainer using flexbox -->

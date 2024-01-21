@@ -33,6 +33,7 @@
 import { eventBus } from "./eventBus.js";
 export default {
   data() {
+    const isAdultRoute = this.$route.name === "adulte";
     return {
       state: false,
       searchQuery: "",
@@ -42,12 +43,15 @@ export default {
       ],
       submenuNav: [
         { title: "Fievre", path: "#" },
+        //...(isAdultRoute ? [] : [{ title: "Douleur", path: "#" }]),
+        //...(isAdultRoute ? [{ title: "Douleur", path: "#" }] : []),
         { title: "Douleur", path: "#" },
         { title: "etc", path: "#" },
         { title: "etc", path: "#" },
       ],
     };
   },
+
   methods: {
     toggleState() {
       this.state = !this.state;
