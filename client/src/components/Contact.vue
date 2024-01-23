@@ -111,7 +111,7 @@
             </div>
             <button
               type="submit"
-              class="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+              class="bg-gradient-to-r from-indigo-600 to-indigo-7 shadow-lg bg-indigo-900 w-full px-4 py-2 text-white font-medium hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
             >
               Envoyer
             </button>
