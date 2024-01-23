@@ -1,6 +1,7 @@
 <template>
   <div class="bg-white py-6 sm:py-8 lg:py-12">
     <Categorie></Categorie>
+    <br /><br />
     <div class="mx-auto max-w-screen-xl px-4 md:px-8">
       <div class="md:hidden"><br /></div>
       <div
@@ -13,8 +14,18 @@
           data-aos="fade-left"
           class="flex flex-col items-center gap-4 md:flex-row lg:gap-6"
         >
-          <a
-            href="#"
+          <router-link
+            :to="{
+              name: 'detail',
+              params: {
+                productName: product.productName || 'Default Name',
+                productPrice: product.productPrice || 'Default Price',
+                productImg: product.productImg || 'Default img',
+                description: product.description || 'Default descrition',
+                genre: product.genre || 'Default genre',
+                type: product.type || 'Default type',
+              },
+            }"
             class="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-40 lg:w-40"
           >
             <img
@@ -23,7 +34,7 @@
               alt="Photo by Martin Sanchez"
               class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
             />
-          </a>
+          </router-link>
 
           <div class="flex flex-col gap-2">
             <span class="text-sm text-gray-400">2024</span>
@@ -31,20 +42,30 @@
             <h2 class="text-xl font-bold text-gray-800">
               <a
                 href="#"
-                class="transition duration-100 hover:text-indigo-500 active:text-indigo-600"
+                class="transition duration-100 hover:text-indigo-500 active:text-indigo-600 ml-1"
                 >{{ product.productName }}</a
               >
             </h2>
 
-            <p class="text-gray-500">
-              {{ product.description }}
+            <p class="text-red-700 ml-6 size-9 text-lg">
+              {{ product.productPrice }}
             </p>
 
             <div>
-              <a
-                href="#"
-                class="font-semibold text-green-700 transition duration-100 hover:text-green-600 active:text-green-700"
-                >Read more</a
+              <router-link
+                :to="{
+                  name: 'detail',
+                  params: {
+                    productName: product.productName || 'Default Name',
+                    productPrice: product.productPrice || 'Default Price',
+                    productImg: product.productImg || 'Default img',
+                    description: product.description || 'Default descrition',
+                    genre: product.genre || 'Default genre',
+                    type: product.type || 'Default type',
+                  },
+                }"
+                class="font-semibold bg-gradient-to-r from-green-500 to-green-700 text-white transition duration-300 hover:from-green-400 hover:to-green-600 active:from-green-600 active:to-green-700 rounded-full px-4 py-2 shadow-lg"
+                >Acheter</router-link
               >
             </div>
           </div>
@@ -67,7 +88,6 @@ export default {
       title: "",
       newProducts: [],
       saveProducts: [],
-      total: null,
     };
   },
 

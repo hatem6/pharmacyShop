@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Blog from "../components/Blog.vue";
+import Contact from "../components/Contact.vue";
+import Detail from "../components/Detail.vue";
 import Adulte from "../components/genre/Adulte.vue";
 import Bebe from "../components/genre/Bebe.vue";
 import Enfant from "../components/genre/Enfant.vue";
@@ -24,6 +26,16 @@ const routes = [
     path: "/Bebe",
     name: "bebe",
     component: Bebe,
+  },
+  {
+    path: "/Contact",
+    name: "contact",
+    component: Contact,
+  },
+  {
+    path: "/Detail/:productName/:productPrice/:productImg/:description/:genre/:type",
+    name: "detail",
+    component: Detail,
   },
 
   // Other routes...

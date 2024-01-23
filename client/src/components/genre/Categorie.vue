@@ -48,6 +48,10 @@ export default {
         { title: "Douleur", path: "#" },
         { title: "etc", path: "#" },
         { title: "etc", path: "#" },
+        { title: "etc", path: "#" },
+        { title: "etc", path: "#" },
+        { title: "etc", path: "#" },
+        { title: "etc", path: "#" },
       ],
     };
   },
@@ -73,7 +77,7 @@ export default {
 <style scoped>
 @media screen and (min-width: 600px) {
   .custom-left {
-    left: 46%;
+    left: 10%;
   }
 }
 </style>

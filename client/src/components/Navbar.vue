@@ -115,7 +115,7 @@ export default {
     return {
       navigation: [
         { title: "Medicaments", router: "/" },
-        { title: "Contact", router: "#" },
+        { title: "Contact", router: "/Contact" },
       ],
     };
   },

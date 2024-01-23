@@ -1,6 +1,7 @@
 <template>
   <div class="bg-white py-6 sm:py-8 lg:py-12">
     <Categorie></Categorie>
+    <br /><br />
     <div class="mx-auto max-w-screen-xl px-4 md:px-8">
       <div class="md:hidden"><br /></div>
       <div
@@ -13,8 +14,18 @@
           data-aos="fade-left"
           class="flex flex-col items-center gap-4 md:flex-row lg:gap-6"
         >
-          <a
-            href="#"
+          <router-link
+            :to="{
+              name: 'detail',
+              params: {
+                productName: product.productName || 'Default Name',
+                productPrice: product.productPrice || 'Default Price',
+                productImg: product.productImg || 'Default img',
+                description: product.description || 'Default descrition',
+                genre: product.genre || 'Default genre',
+                type: product.type || 'Default type',
+              },
+            }"
             class="group relative block h-56 w-full shrink-0 self-start overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-24 md:w-24 lg:h-40 lg:w-40"
           >
             <img
@@ -23,7 +34,7 @@
               alt="Photo by Martin Sanchez"
               class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
             />
-          </a>
+          </router-link>
 
           <div class="flex flex-col gap-2">
             <span class="text-sm text-gray-400">2024</span>
@@ -44,7 +55,7 @@
               <a
                 href="#"
                 class="font-semibold text-green-700 transition duration-100 hover:text-green-600 active:text-green-700"
-                >Read more</a
+                >Acheter</a
               >
             </div>
           </div>

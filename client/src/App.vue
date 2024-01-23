@@ -5,7 +5,7 @@
       <br /><br /><br />
       <br />
     </div>
-    <Category data-aos="fade-up"></Category>
+    <Category v-if="!RouteHidden" data-aos="fade-up"></Category>
     <router-view></router-view>
     <Footer data-aos="fade-right"></Footer>
   </div>
@@ -41,6 +41,12 @@ export default {
     return {
       RouteHidden: false,
     };
+  },
+  watch: {
+    $route(to) {
+      /* to hidden the categorie component from this routes */
+      this.RouteHidden = to.name === "contact";
+    },
   },
 
   mounted() {},
