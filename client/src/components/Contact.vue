@@ -16,9 +16,10 @@
           </p>
           <br />
           <p>
-            We’re here to help and answer any question you might have, We look
-            forward to hearing from you! Please fill out the form, or use the
-            contact information below.
+            Nous sommes là pour vous aider et répondre à toute question que vous
+            pourriez avoir. Nous sommes impatients de recevoir de vos nouvelles
+            ! Veuillez remplir le formulaire ou utiliser les coordonnées
+            ci-dessous pour nous contacter.
           </p>
           <div>
             <ul class="mt-6 flex flex-wrap gap-x-10 gap-y-6 items-center">

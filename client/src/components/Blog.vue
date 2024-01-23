@@ -128,6 +128,7 @@ import animationData from "../assets/animation/health3.json";
 import secondAnimationData from "../assets/animation/health2.json";
 import deliveryAnimationData from "../assets/animation/delivery.json";
 import clock from "../assets/animation/clock.json";
+
 export default {
   created() {
     this.$nextTick(() => {
@@ -145,6 +146,7 @@ export default {
       saveProducts: [],
     };
   },
+
   methods: {
     initializeLottie() {
       if (typeof Lottie === "undefined") {
@@ -206,7 +208,7 @@ export default {
       });
     },
   },
-  async mounted() {
+  mounted() {
     this.initializeLottie();
     fetchProducts(); // store in the localstorage
     try {

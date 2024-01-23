@@ -6,6 +6,7 @@
       <br />
     </div>
     <Category v-if="!RouteHidden" data-aos="fade-up"></Category>
+    <Container></Container>
     <router-view></router-view>
     <Footer data-aos="fade-right"></Footer>
   </div>
@@ -15,6 +16,7 @@
 import "aos/dist/aos.css";
 import AOS from "aos";
 import Navbar from "./components/Navbar.vue";
+import Container from "./components/Container.vue";
 import Category from "./components/Category.vue";
 import Blog from "./components/Blog.vue";
 import Footer from "./components/Footer.vue";
@@ -33,6 +35,7 @@ export default {
 
   components: {
     Navbar,
+    Container,
     Category,
     Blog,
     Footer,

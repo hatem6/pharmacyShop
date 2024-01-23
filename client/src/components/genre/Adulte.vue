@@ -36,7 +36,7 @@
             />
           </router-link>
 
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-2 productInfo">
             <span class="text-sm text-gray-400">2024</span>
 
             <h2 class="text-xl font-bold text-gray-800">
