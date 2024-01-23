@@ -6,8 +6,8 @@
       <br />
     </div>
     <Category v-if="!RouteHidden" data-aos="fade-up"></Category>
-    <Container></Container>
     <router-view></router-view>
+    <Container v-if="!SliderHidden"></Container>
     <Footer data-aos="fade-right"></Footer>
   </div>
 </template>
@@ -43,12 +43,15 @@ export default {
   data() {
     return {
       RouteHidden: false,
+      SliderHidden: false,
     };
   },
   watch: {
     $route(to) {
       /* to hidden the categorie component from this routes */
       this.RouteHidden = to.name === "contact";
+      this.SliderHidden =
+        to.name === "contact" || to.name === "adulte" || to.name === "enfant";
     },
   },
 
