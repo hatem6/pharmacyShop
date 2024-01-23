@@ -51,7 +51,10 @@ export default {
       /* to hidden the categorie component from this routes */
       this.RouteHidden = to.name === "contact";
       this.SliderHidden =
-        to.name === "contact" || to.name === "adulte" || to.name === "enfant";
+        to.name === "contact" ||
+        to.name === "detail" ||
+        to.name === "adulte" ||
+        to.name === "enfant";
     },
   },
 
